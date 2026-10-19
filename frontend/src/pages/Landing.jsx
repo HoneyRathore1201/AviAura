@@ -83,11 +83,12 @@ const features = [
 ]
 
 const stats = [
-  { value: '50K+', label: 'Trips Planned', icon: '✈️' },
-  { value: '120+', label: 'Destinations', icon: '🌍' },
-  { value: '98%', label: 'Budget Accuracy', icon: '💎' },
-  { value: '4.9★', label: 'User Rating', icon: '⭐' },
+  { value: '< 2.5s', label: 'AI Generation Latency', desc: 'Gemini 2.5 & Groq pipeline', icon: '⚡' },
+  { value: '5-Day', label: 'Meteorological Sync', desc: 'OpenWeather live 3h window', icon: '🌦️' },
+  { value: '100%', label: 'Budget Calibration', desc: 'Zero cost-drift guarantee', icon: '🛡️' },
+  { value: '24/7', label: 'AURA AI Concierge', desc: 'Real-time smart assistant', icon: '🤖' },
 ]
+
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -352,7 +353,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ────── STATS ────── */}
+      {/* ────── ARCHITECTURE & SYSTEM SPECS ────── */}
       <section ref={statsRef} className="relative z-10 py-16 border-y border-white/[0.06] bg-slate-900/30">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -362,11 +363,12 @@ export default function Landing() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={statsVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="glass-card rounded-2xl p-6 text-center border border-white/[0.06]"
+                className="glass-card rounded-2xl p-5 text-center border border-white/[0.08] hover:border-amber-500/30 transition group"
               >
-                <div className="text-2xl mb-1.5">{stat.icon}</div>
-                <div className="font-display text-3xl font-bold text-white">{stat.value}</div>
-                <div className="text-xs text-slate-400 mt-1">{stat.label}</div>
+                <div className="text-xl mb-1 text-amber-400">{stat.icon}</div>
+                <div className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">{stat.value}</div>
+                <div className="text-xs font-semibold text-slate-200 mt-1">{stat.label}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">{stat.desc}</div>
               </motion.div>
             ))}
           </div>

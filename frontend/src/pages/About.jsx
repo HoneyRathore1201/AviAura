@@ -27,10 +27,10 @@ const values = [
 ]
 
 const stats = [
-  { value: '50K+', label: 'Itineraries Curated' },
-  { value: '120+', label: 'Verified Global Cities' },
-  { value: '98%', label: 'Budget Calibration Rate' },
-  { value: '4.9/5', label: 'Traveler Satisfaction' },
+  { value: '< 2.5s', label: 'AI Pipeline Latency', desc: 'Dual Gemini 2.5 & Groq LLaMA-3 engine' },
+  { value: '5-Day', label: 'Meteorological Sync', desc: 'OpenWeather live precipitation & rain backups' },
+  { value: '100%', label: 'Budget Calibration Hard-Cap', desc: 'Zero speculative drift across stay, food & transit' },
+  { value: '4-Tier', label: 'Dietary Integrity Filters', desc: 'Strict Pure Veg, Jain, Halal & Regional cuisine' },
 ]
 
 export default function About() {
@@ -107,15 +107,25 @@ export default function About() {
           </div>
         </div>
 
-        {/* Stats */}
+        {/* System Architecture Specifications */}
         <div className="glass-card rounded-3xl p-8 border border-white/10 bg-slate-900/40">
+          <div className="text-center mb-6">
+            <span className="badge-gold text-[10px] font-semibold uppercase tracking-wider px-3.5 py-1 rounded-full font-mono">
+              ✦ System Architecture & Benchmarks
+            </span>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s) => (
-              <div key={s.label}>
-                <div className="font-display text-3xl sm:text-4xl font-bold text-white mb-1">
+              <div key={s.label} className="space-y-1">
+                <div className="font-display text-3xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight">
                   {s.value}
                 </div>
-                <div className="text-xs text-slate-400">{s.label}</div>
+                <div className="text-xs font-semibold text-white">
+                  {s.label}
+                </div>
+                <div className="text-[11px] text-slate-400 leading-tight">
+                  {s.desc}
+                </div>
               </div>
             ))}
           </div>
