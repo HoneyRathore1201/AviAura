@@ -29,16 +29,14 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 gap-6 pt-8">
             {/* Creator 1: Honey Rathore */}
             <div className="rounded-2xl p-6 border border-white/[0.08] bg-slate-900/50 hover:border-amber-500/40 transition-all group flex flex-col sm:flex-row items-start sm:items-center gap-5">
-              {/* Avatar Placeholder */}
+              {/* Universal Blue User Silhouette Placeholder */}
               <div className="relative shrink-0">
-                <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 p-0.5 shadow-lg shadow-amber-500/10 group-hover:scale-105 transition-transform">
-                  <img
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"
-                    alt="Honey Rathore"
-                    className="h-full w-full rounded-[14px] object-cover"
-                  />
+                <div className="h-14 w-14 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shadow-lg shadow-sky-500/10 group-hover:scale-105 transition-transform">
+                  <svg className="h-7 w-7 text-sky-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" d="M12 2a5 5 0 100 10 5 5 0 000-10zm-7 18a7 7 0 0114 0H5z" clipRule="evenodd" />
+                  </svg>
                 </div>
-                <span className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-[#070A10]" title="Active Developer" />
+                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-[#070A10]" title="Active Developer" />
               </div>
 
               <div className="flex-1 min-w-0 space-y-1">
@@ -73,16 +71,14 @@ export default function Footer() {
 
             {/* Creator 2: Kashish Tomar */}
             <div className="rounded-2xl p-6 border border-white/[0.08] bg-slate-900/50 hover:border-amber-500/40 transition-all group flex flex-col sm:flex-row items-start sm:items-center gap-5">
-              {/* Avatar Placeholder */}
+              {/* Universal Blue User Silhouette Placeholder */}
               <div className="relative shrink-0">
-                <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-slate-700 to-slate-500 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
-                  <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80"
-                    alt="Kashish Tomar"
-                    className="h-full w-full rounded-[14px] object-cover"
-                  />
+                <div className="h-14 w-14 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shadow-lg shadow-sky-500/10 group-hover:scale-105 transition-transform">
+                  <svg className="h-7 w-7 text-sky-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" d="M12 2a5 5 0 100 10 5 5 0 000-10zm-7 18a7 7 0 0114 0H5z" clipRule="evenodd" />
+                  </svg>
                 </div>
-                <span className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-[#070A10]" title="Active Developer" />
+                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-[#070A10]" title="Active Developer" />
               </div>
 
               <div className="flex-1 min-w-0 space-y-1">
