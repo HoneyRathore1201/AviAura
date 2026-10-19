@@ -1,0 +1,6 @@
+python-dotenv
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
