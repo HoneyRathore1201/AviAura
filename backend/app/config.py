@@ -37,6 +37,8 @@ class Settings(BaseSettings):
     openweathermap_units: str = "metric"
 
     google_client_id: str = ""
+    google_client_secret: str = ""
+
 
 
 @lru_cache
