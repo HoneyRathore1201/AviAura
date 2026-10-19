@@ -10,6 +10,8 @@ export default function GoogleAuthButton({ redirectTo = '/dashboard' }) {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const [gisReady, setGisReady] = useState(false)
+
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
   const handleCredentialResponse = async (response) => {
@@ -42,24 +44,9 @@ export default function GoogleAuthButton({ redirectTo = '/dashboard' }) {
   useEffect(() => {
     if (!googleClientId) return
 
-    // Load Google Identity Services script if not present
-    const loadGIS = () => {
-      if (window.google?.accounts?.id) {
-        initGIS()
-        return
-      }
-
-      const script = document.createElement('script')
-      script.src = 'https://accounts.google.com/gsi/client'
-      script.async = true
-      script.defer = true
-      script.onload = initGIS
-      script.onerror = () => setError('Failed to load Google Identity Services.')
-      document.body.appendChild(script)
-    }
-
     const initGIS = () => {
       try {
+        if (!window.google?.accounts?.id) return
         window.google.accounts.id.initialize({
           client_id: googleClientId,
           callback: handleCredentialResponse,
@@ -77,27 +64,43 @@ export default function GoogleAuthButton({ redirectTo = '/dashboard' }) {
             width: 320,
             logo_alignment: 'left',
           })
+          setGisReady(true)
         }
       } catch (err) {
         console.error('Google Identity init error:', err)
       }
     }
 
-    loadGIS()
+    if (window.google?.accounts?.id) {
+      initGIS()
+    } else {
+      const script = document.createElement('script')
+      script.src = 'https://accounts.google.com/gsi/client'
+      script.async = true
+      script.defer = true
+      script.onload = initGIS
+      script.onerror = () => setError('Failed to load Google Identity Services.')
+      document.body.appendChild(script)
+    }
   }, [googleClientId])
 
   return (
     <div className="w-full flex flex-col items-center space-y-4">
-      {/* Real Google GIS button mount container */}
-      {googleClientId && (
-        <div ref={googleBtnRef} className="flex justify-center min-h-[44px]" />
-      )}
-
-      {/* Primary Custom Google Sign-In Button */}
-      {(!googleClientId || !window.google?.accounts?.id) && (
+      {/* Real Google GIS button (ONLY rendered when googleClientId is set) */}
+      {googleClientId ? (
+        <div className="w-full flex justify-center min-h-[44px]">
+          <div ref={googleBtnRef} className="flex justify-center" />
+          {!gisReady && (
+            <div className="w-[320px] h-[44px] rounded-full bg-slate-900 border border-white/10 animate-pulse flex items-center justify-center text-xs text-slate-400">
+              Connecting Google Identity...
+            </div>
+          )}
+        </div>
+      ) : (
+        /* Fallback Demo Button (ONLY rendered when googleClientId is NOT set) */
         <button
           type="button"
-          onClick={googleClientId ? () => window.google?.accounts?.id?.prompt() : handleDemoSignIn}
+          onClick={handleDemoSignIn}
           disabled={loading}
           className="w-full max-w-sm rounded-full border border-white/15 bg-white text-slate-900 hover:bg-slate-100 font-display text-sm font-semibold py-3.5 px-6 flex items-center justify-center gap-3.5 shadow-xl transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-60"
         >
@@ -122,19 +125,6 @@ export default function GoogleAuthButton({ redirectTo = '/dashboard' }) {
           </svg>
           <span>{loading ? 'Authenticating…' : 'Continue with Google'}</span>
         </button>
-      )}
-
-      {/* Client ID Setup Notice if not configured */}
-      {!googleClientId && (
-        <div className="w-full max-w-sm rounded-xl border border-amber-500/20 bg-amber-500/10 p-3 text-left">
-          <div className="flex items-start gap-2">
-            <span className="text-amber-400 text-xs">ℹ</span>
-            <p className="text-[11px] text-amber-200/90 leading-relaxed">
-              <strong>Google Client ID setup:</strong> Provide your Google OAuth Client ID to activate real Google popups.
-              Clicking <em>Continue with Google</em> above currently logs in via instant developer test mode.
-            </p>
-          </div>
-        </div>
       )}
 
       {error && (
