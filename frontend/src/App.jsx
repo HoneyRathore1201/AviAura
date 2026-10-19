@@ -12,14 +12,15 @@ import Dashboard from './pages/Dashboard'
 import About from './pages/About'
 import Support from './pages/Support'
 import Explore from './pages/Explore'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen flex flex-col justify-between">
           <Navbar />
-          <main>
+          <main className="flex-1">
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/plan" element={<PlanTrip />} />
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
+          <Footer />
           <AiChatbot />
         </div>
       </BrowserRouter>
