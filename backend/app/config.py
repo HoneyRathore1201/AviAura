@@ -30,14 +30,35 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 10080
 
-    groq_api_key: str
-    groq_model: str = "llama3-8b-8192"
+    groq_api_key: str = ""
+    groq_api_keys: str = ""
+    groq_model: str = "qwen/qwen3.8-27b"
+
+    gemini_api_key: str = ""
+    gemini_api_keys: str = ""
+    gemini_model: str = "gemini-2.5-flash"
 
     openweathermap_api_key: str
     openweathermap_units: str = "metric"
 
     google_client_id: str = ""
     google_client_secret: str = ""
+
+    def get_groq_keys(self) -> list[str]:
+        keys = []
+        if self.groq_api_keys:
+            keys.extend([k.strip() for k in self.groq_api_keys.split(",") if k.strip()])
+        if self.groq_api_key and self.groq_api_key.strip() not in keys:
+            keys.append(self.groq_api_key.strip())
+        return keys
+
+    def get_gemini_keys(self) -> list[str]:
+        keys = []
+        if self.gemini_api_keys:
+            keys.extend([k.strip() for k in self.gemini_api_keys.split(",") if k.strip()])
+        if self.gemini_api_key and self.gemini_api_key.strip() not in keys:
+            keys.append(self.gemini_api_key.strip())
+        return keys
 
 
 
